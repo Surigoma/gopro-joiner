@@ -2,10 +2,10 @@
 
 [日本語](SPECIFICATION.ja.md)
 
-- Document version: 0.2.2
+- Document version: 0.2.3
 - Status: Draft
 - Target release: MVP
-- Last updated: 2026-08-10
+- Last updated: 2026-08-11
 
 The specification is split by subject. Use this file as the entry point and update only the relevant document when making a change.
 
@@ -15,6 +15,7 @@ The specification is split by subject. Use this file as the entry point and upda
 | [Functional requirements](functional-requirements.md) | Scanning, classification, joining, concurrency, output, and errors |
 | [Architecture](architecture.md) | Electron, Go backend, external tools, and communication protocol |
 | [Quality and testing](quality-and-testing.md) | Non-functional requirements, acceptance criteria, testing, and implementation phases |
+| [Releasing](releasing.md) | Version tags, release validation, artifacts, and current signing limitations |
 | [Security exceptions](security-exceptions.md) | Time-limited supply-chain policy exceptions |
 
 ## Critical requirements

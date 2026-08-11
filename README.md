@@ -15,7 +15,7 @@ GoPro Joiner turns the chapter files created by a GoPro into one MP4 per recordi
 
 ## Install and launch
 
-GoPro Joiner is distributed as a portable application. Obtain the package for your operating system, extract it, and keep every file in the extracted directory together.
+GoPro Joiner is distributed as a portable application. Download the package for your operating system from [GitHub Releases](https://github.com/Surigoma/gopro-joiner/releases), verify it with `SHA256SUMS.txt`, extract it, and keep every file in the extracted directory together.
 
 - Windows: launch `GoPro Joiner.exe` inside `GoProJoiner-win32-x64`.
 - macOS: launch `GoPro Joiner.app`.
