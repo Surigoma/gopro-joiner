@@ -21,5 +21,3 @@
 * **release:** keep release PR current ([#14](https://github.com/Surigoma/gopro-joiner/issues/14)) ([1006743](https://github.com/Surigoma/gopro-joiner/commit/10067433a90d352156a0a7e80c503c427eef8fd0))
 * **release:** set initial release version ([#12](https://github.com/Surigoma/gopro-joiner/issues/12)) ([15a303a](https://github.com/Surigoma/gopro-joiner/commit/15a303af824df014fcce67182f00c9f711242ccf))
 * **release:** set initial version baseline ([#11](https://github.com/Surigoma/gopro-joiner/issues/11)) ([52ca7a2](https://github.com/Surigoma/gopro-joiner/commit/52ca7a2886b8ad00b499e732acef7a92218b1896))
-
-## Changelog
