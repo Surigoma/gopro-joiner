@@ -2,19 +2,13 @@
 
 [日本語](releasing.ja.md)
 
-Releases are built only by GitHub Actions from a version tag on `main`.
+Release Please derives versions and `CHANGELOG.md` entries from Conventional Commits on `main`.
 
-1. Update `version` in `package.json` and merge the change into `main` through a pull request.
-2. Confirm that the `main` CI run succeeds.
-3. Create and push an annotated tag that exactly matches the package version:
+1. Give every pull request a Conventional Commit title such as `feat: add capture filter`, `fix(ui): keep settings visible`, or `docs: clarify installation`. A breaking change uses `feat!:` or `BREAKING CHANGE:` in the squash commit body.
+2. Merge with squash. GitHub uses the pull request title as the commit subject, so `main` retains one Conventional Commit per pull request.
+3. Release Please opens or updates a release pull request containing the next version, `package.json`, and `CHANGELOG.md`. With the built-in `GITHUB_TOKEN`, approve that pull request's CI run in GitHub when prompted.
+4. Review and merge the release pull request. Release Please creates the version tag and GitHub Release, then the same workflow rebuilds and smoke-tests Windows, macOS, and Linux packages and attaches them with `SHA256SUMS.txt`.
 
-   ```powershell
-   git switch main
-   git pull --ff-only
-   git tag -a v0.1.0 -m "GoPro Joiner v0.1.0"
-   git push origin v0.1.0
-   ```
-
-The release workflow rejects a mismatched version or a commit that is not contained in `main`. It rebuilds and smoke-tests the application on Windows, macOS, and Linux, archives the portable applications, generates `SHA256SUMS.txt`, and publishes the files with generated release notes. A SemVer prerelease tag such as `v0.2.0-rc.1` creates a GitHub prerelease.
+Do not edit generated changelog sections, version tags, or release versions manually. Use `Release-As: x.y.z` in a Conventional Commit body when a specific next version is required.
 
 The portable applications are not currently code-signed or notarized. Add signing only after the required platform certificates and protected release secrets are available.

@@ -2,7 +2,7 @@
 
 [日本語](SPECIFICATION.ja.md)
 
-- Document version: 0.2.3
+- Document version: 0.2.4
 - Status: Draft
 - Target release: MVP
 - Last updated: 2026-08-11

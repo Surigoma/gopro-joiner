@@ -2,31 +2,33 @@ name: Release
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - main
 
 permissions:
   contents: read
 
 concurrency:
-  group: release-${{ github.ref }}
+  group: release
   cancel-in-progress: false
 
 jobs:
-  validate:
+  release_please:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-      - name: Validate release tag
-        run: |
-          node -e "const version = require('./package.json').version; if (process.env.GITHUB_REF_NAME !== 'v' + version) throw new Error('tag must match package.json version: v' + version)"
-          git merge-base --is-ancestor "$GITHUB_SHA" origin/main
+      - id: release
+        uses: googleapis/release-please-action@16a9c90856f42705d54a6fda1823352bdc62cf38 # v4.4.0
 
   build:
-    needs: validate
+    needs: release_please
+    if: needs.release_please.outputs.release_created == 'true'
     strategy:
       fail-fast: false
       matrix:
@@ -44,6 +46,7 @@ jobs:
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
+          ref: ${{ needs.release_please.outputs.tag_name }}
           persist-credentials: false
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
@@ -73,17 +76,21 @@ jobs:
       - name: Archive Windows application
         if: runner.os == 'Windows'
         shell: pwsh
-        run: Compress-Archive -LiteralPath "release/GoProJoiner-win32-x64" -DestinationPath "release/GoProJoiner-${env:GITHUB_REF_NAME}-windows-x64.zip"
+        run: Compress-Archive -LiteralPath "release/GoProJoiner-win32-x64" -DestinationPath "release/GoProJoiner-${{ needs.release_please.outputs.tag_name }}-windows-x64.zip"
       - name: Archive macOS application
         if: runner.os == 'macOS'
+        env:
+          RELEASE_TAG: ${{ needs.release_please.outputs.tag_name }}
         run: |
           arch="$(node -p 'process.arch')"
-          ditto -c -k --sequesterRsrc --keepParent "release/GoPro Joiner.app" "release/GoProJoiner-${GITHUB_REF_NAME}-macos-${arch}.zip"
+          ditto -c -k --sequesterRsrc --keepParent "release/GoPro Joiner.app" "release/GoProJoiner-${RELEASE_TAG}-macos-${arch}.zip"
       - name: Archive Linux application
         if: runner.os == 'Linux'
+        env:
+          RELEASE_TAG: ${{ needs.release_please.outputs.tag_name }}
         run: |
           arch="$(node -p 'process.arch')"
-          tar -C release -czf "release/GoProJoiner-${GITHUB_REF_NAME}-linux-${arch}.tar.gz" "GoProJoiner-linux-${arch}"
+          tar -C release -czf "release/GoProJoiner-${RELEASE_TAG}-linux-${arch}.tar.gz" "GoProJoiner-linux-${arch}"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: release-${{ matrix.artifact-name }}
@@ -93,8 +100,8 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-  release:
-    needs: build
+  publish_assets:
+    needs: [release_please, build]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -108,10 +115,8 @@ jobs:
         run: |
           cd release-assets
           sha256sum GoProJoiner-* | sort -k2 > SHA256SUMS.txt
-      - name: Publish GitHub release
+      - name: Upload release assets
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          args=(--verify-tag --generate-notes --title "GoPro Joiner ${GITHUB_REF_NAME}")
-          if [[ "$GITHUB_REF_NAME" == *-* ]]; then args+=(--prerelease); fi
-          gh release create "$GITHUB_REF_NAME" release-assets/* "${args[@]}"
+          RELEASE_TAG: ${{ needs.release_please.outputs.tag_name }}
+        run: gh release upload "$RELEASE_TAG" release-assets/* --clobber

@@ -4,6 +4,8 @@
 
 GoPro Joiner turns the chapter files created by a GoPro into one MP4 per recording. It keeps the original video and audio streams without re-encoding and preserves GoPro GPMF telemetry used by tools such as Gyroflow.
 
+See the [changelog](CHANGELOG.md) for release history.
+
 ## Highlights
 
 - Automatically finds and orders chapters from the same recording.
