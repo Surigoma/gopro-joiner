@@ -24,7 +24,7 @@ func TestConcatEntry(t *testing.T) {
 		want    string
 		wantErr bool
 	}{
-		{"spaces", `C:\GoPro clips\GX010001.MP4`, "file 'C:/GoPro clips/GX010001.MP4'\n", false},
+		{"spaces", `C:\GoPro clips\GX010001.MP4`, "file '" + filepath.ToSlash(`C:\GoPro clips\GX010001.MP4`) + "'\n", false},
 		{"apostrophe", `/media/camera's/GX010001.MP4`, "file '/media/camera'\\''s/GX010001.MP4'\n", false},
 		{"line break", "bad\npath.mp4", "", true},
 	}

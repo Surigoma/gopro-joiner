@@ -19,7 +19,7 @@ let resources;
 if (process.platform === "darwin") {
   target = path.join(root, "release", "GoPro Joiner.app");
   rmSync(target, { recursive: true, force: true });
-  cpSync(path.join(electron, "Electron.app"), target, { recursive: true });
+  cpSync(path.join(electron, "Electron.app"), target, { recursive: true, verbatimSymlinks: true });
   resources = path.join(target, "Contents", "Resources");
 } else {
   target = path.join(root, "release", `GoProJoiner-${process.platform}-${process.arch}`);
