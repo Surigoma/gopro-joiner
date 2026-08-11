@@ -15,7 +15,7 @@ GoPro Joinerは、GoProが分割保存したチャプターファイルを、1�
 
 ## インストールと起動
 
-GoPro Joinerはポータブルアプリとして配布します。お使いのOS向けパッケージを入手して展開し、展開先のファイルはすべて同じフォルダに置いたまま使用してください。
+GoPro Joinerはポータブルアプリとして配布します。[GitHub Releases](https://github.com/Surigoma/gopro-joiner/releases)からお使いのOS向けパッケージを入手し、`SHA256SUMS.txt`で検証してから展開してください。展開先のファイルはすべて同じフォルダに置いたまま使用してください。
 
 - Windows: `GoProJoiner-win32-x64` 内の `GoPro Joiner.exe` を起動します。
 - macOS: `GoPro Joiner.app` を起動します。
