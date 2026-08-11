@@ -2,19 +2,13 @@
 
 [English](releasing.md)
 
-リリースは、`main` 上のバージョンタグからGitHub Actionsだけで作成します。
+Release Pleaseが、`main`のConventional Commitsからバージョンと`CHANGELOG.md`を生成します。
 
-1. `package.json` の `version` を更新し、Pull Request経由で `main` へマージします。
-2. `main` のCIが成功したことを確認します。
-3. パッケージのバージョンと完全に一致する注釈付きタグを作成してpushします。
+1. すべてのPull Requestに、`feat: add capture filter`、`fix(ui): keep settings visible`、`docs: clarify installation`のようなConventional Commit形式のタイトルを付けます。破壊的変更には`squash`コミット本文の`BREAKING CHANGE:`または`feat!:`を使用します。
+2. squash mergeします。GitHubはPull Requestタイトルをコミット件名に使うため、`main`にはPull Requestごとに1件のConventional Commitが残ります。
+3. Release Pleaseが、次のバージョン、`package.json`、`CHANGELOG.md`を含むリリースPull Requestを作成または更新します。標準`GITHUB_TOKEN`で作られたPull Requestでは、GitHubに表示されるCI実行の承認を行います。
+4. リリースPull Requestを確認してマージします。Release PleaseがバージョンタグとGitHub Releaseを作成し、同じworkflowがWindows、macOS、Linux版を再ビルド・スモークテストして、`SHA256SUMS.txt`とともに添付します。
 
-   ```powershell
-   git switch main
-   git pull --ff-only
-   git tag -a v0.1.0 -m "GoPro Joiner v0.1.0"
-   git push origin v0.1.0
-   ```
-
-リリースworkflowは、バージョンが一致しないタグと、`main` に含まれないコミットを拒否します。Windows、macOS、Linuxで再ビルドとスモークテストを行い、ポータブルアプリをアーカイブし、`SHA256SUMS.txt` を生成して、自動生成したリリースノートとともに公開します。`v0.2.0-rc.1` のようなSemVerプレリリースタグはGitHubのプレリリースとして公開します。
+生成済みの変更履歴、バージョンタグ、リリースバージョンは手動編集しません。次のバージョンを明示する場合は、Conventional Commit本文に`Release-As: x.y.z`を記載します。
 
 現在のポータブルアプリはコード署名および公証を行いません。署名は、各プラットフォーム用の証明書と保護されたリリースシークレットを用意してから追加します。
