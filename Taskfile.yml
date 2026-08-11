@@ -1,0 +1,123 @@
+version: "3"
+
+tasks:
+  install:
+    desc: Install the locked JavaScript dependencies
+    cmds:
+      - corepack yarn install --immutable
+
+  install:electron:
+    desc: Explicitly download the pinned Electron runtime
+    deps: [install]
+    cmds:
+      - node node_modules/electron/install.js
+
+  build:backend:
+    cmds:
+      - node scripts/build-backend.mjs
+
+  build:ui:
+    cmds:
+      - corepack yarn exec tsc --project tsconfig.json
+      - corepack yarn exec tsc --project tsconfig.renderer.json
+      - corepack yarn exec vite build
+
+  build:
+    desc: Build the Go backend and Electron UI
+    cmds:
+      - task: install
+      - task: build:backend
+      - task: build:ui
+
+  test:backend:
+    cmds:
+      - node scripts/test-backend.mjs
+
+  test:protocol:
+    deps: [build:backend]
+    cmds:
+      - node scripts/test-protocol.mjs
+
+  test:media-matrix:
+    deps: [build:backend]
+    cmds:
+      - node scripts/test-media-matrix.mjs
+
+  test:real-media:
+    deps: [build:backend]
+    cmds:
+      - node scripts/test-real-media.mjs
+
+  check:
+    desc: Run static compilation and backend tests
+    cmds:
+      - task: install
+      - task: build:ui
+      - task: test:backend
+      - task: test:protocol
+
+  dev:
+    desc: Build and start the desktop app
+    cmds:
+      - task: build
+      - task: install:electron
+      - corepack yarn exec electron .
+
+  start:
+    cmds:
+      - task: install:electron
+      - corepack yarn exec electron .
+
+  package:
+    desc: Build the portable application for the current OS
+    cmds:
+      - task: build
+      - task: install:electron
+      - task: sbom
+      - node scripts/package.mjs
+
+  package:windows:
+    desc: Build the Windows portable application on Windows
+    platforms: [windows]
+    cmds:
+      - task: package
+
+  package:macos:
+    desc: Build the macOS application bundle on macOS
+    platforms: [darwin]
+    cmds:
+      - task: package
+
+  package:linux:
+    desc: Build the Linux portable application on Linux
+    platforms: [linux]
+    cmds:
+      - task: package
+
+  smoke:package:
+    desc: Launch the packaged application in smoke-test mode
+    deps: [verify:package]
+    cmds:
+      - node scripts/smoke-package.mjs
+
+  verify:package:
+    desc: Verify packaged artifact and native tool checksums
+    deps: [verify:sbom]
+    cmds:
+      - node scripts/verify-package.mjs
+
+  sbom:
+    desc: Generate a CycloneDX SBOM from the locked Yarn dependency graph
+    deps: [install]
+    cmds:
+      - node scripts/sbom.mjs
+
+  verify:sbom:
+    desc: Verify the SBOM against the locked Yarn dependency graph
+    cmds:
+      - node scripts/sbom.mjs --verify
+
+  audit:
+    desc: Audit recursive npm dependencies at high severity
+    cmds:
+      - corepack yarn npm audit --recursive --severity high

@@ -1,0 +1,8 @@
+node_modules/
+.yarn/install-state.gz
+dist/
+bin/
+release/
+.cache/
+*.partial
+gopro-joiner.cdx.json
