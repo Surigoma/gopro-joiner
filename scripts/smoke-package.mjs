@@ -8,7 +8,8 @@ const executable = process.platform === "win32"
   : process.platform === "darwin"
     ? path.join(root, "release", "GoPro Joiner.app", "Contents", "MacOS", "Electron")
     : path.join(root, "release", `GoProJoiner-linux-${process.arch}`, "gopro-joiner");
-const result = spawnSync(executable, ["--smoke-test"], {
+const args = process.platform === "linux" && process.env.CI ? ["--no-sandbox", "--smoke-test"] : ["--smoke-test"];
+const result = spawnSync(executable, args, {
   stdio: "inherit",
   shell: false,
   windowsHide: true,
