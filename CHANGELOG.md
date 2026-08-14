@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.0](https://github.com/Surigoma/takebinder/compare/v0.1.0...v0.2.0) (2026-08-14)
+
+
+### Features
+
+* rename app to TakeBinder ([#17](https://github.com/Surigoma/takebinder/issues/17)) ([6151d3b](https://github.com/Surigoma/takebinder/commit/6151d3bff2ebcc32fb3bed877dce384fdec2745a))
+
+
+### Bug Fixes
+
+* **deps:** update nanoid to 3.3.18 ([#18](https://github.com/Surigoma/takebinder/issues/18)) ([c116651](https://github.com/Surigoma/takebinder/commit/c116651c4c47523013cc653e5736add2b23bb8f6))
+* **release:** specify repository for asset upload ([#15](https://github.com/Surigoma/takebinder/issues/15)) ([dbe47b0](https://github.com/Surigoma/takebinder/commit/dbe47b087c102af905ce0aeb7f7e41edd1987592))
+
 ## 0.1.0 (2026-08-11)
 
 
