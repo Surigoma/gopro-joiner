@@ -1,8 +1,8 @@
-# GoPro Joiner
+# TakeBinder
 
 [日本語](README.ja.md)
 
-GoPro Joiner turns the chapter files created by a GoPro into one MP4 per recording. It keeps the original video and audio streams without re-encoding and preserves GoPro GPMF telemetry used by tools such as Gyroflow.
+TakeBinder joins the chapter files created by a GoPro into one MP4 per recording and organizes the results into predictable folders. It keeps the original video and audio streams without re-encoding and preserves GoPro GPMF telemetry used by tools such as Gyroflow.
 
 See the [changelog](CHANGELOG.md) for release history.
 
@@ -17,13 +17,13 @@ See the [changelog](CHANGELOG.md) for release history.
 
 ## Install and launch
 
-GoPro Joiner is distributed as a portable application. Download the package for your operating system from [GitHub Releases](https://github.com/Surigoma/gopro-joiner/releases), verify it with `SHA256SUMS.txt`, extract it, and keep every file in the extracted directory together.
+TakeBinder is distributed as a portable application. Download the package for your operating system from [GitHub Releases](https://github.com/Surigoma/takebinder/releases), verify it with `SHA256SUMS.txt`, extract it, and keep every file in the extracted directory together.
 
-- Windows: launch `GoPro Joiner.exe` inside `GoProJoiner-win32-x64`.
-- macOS: launch `GoPro Joiner.app`.
-- Linux: launch `gopro-joiner` inside `GoProJoiner-linux-x64`.
+- Windows: launch `TakeBinder.exe` inside `TakeBinder-win32-x64`.
+- macOS: launch `TakeBinder.app`.
+- Linux: launch `takebinder` inside `TakeBinder-linux-x64`.
 
-On first use, open **Settings** and select **Download verified tools**. GoPro Joiner downloads pinned standalone FFmpeg and ffprobe binaries, verifies their size and SHA-256 hash, and stores them in the application's managed data directory. An internet connection is needed for this download; video processing itself is local.
+On first use, open **Settings** and select **Download verified tools**. TakeBinder downloads pinned standalone FFmpeg and ffprobe binaries, verifies their size and SHA-256 hash, and stores them in the application's managed data directory. An internet connection is needed for this download; video processing itself is local.
 
 ## Quick start
 
@@ -39,7 +39,7 @@ The activity log reports completed files, warnings, skipped files, and failures.
 
 ## Your source videos are protected
 
-GoPro Joiner is designed never to modify, move, or delete input videos.
+TakeBinder is designed never to modify, move, or delete input videos.
 
 - Existing output files are not silently overwritten; a numbered name is chosen instead.
 - Work is written to a temporary file and finalized only after verification succeeds.
@@ -80,6 +80,12 @@ Use **Restore defaults** to reset the language and conversion settings. Saved in
 - Stream-incompatible chapters fail instead of falling back to re-encoding.
 - Real GoPro footage has passed packet-level video, audio, and `gpmd` verification, but every GoPro model and recording mode has not yet been validated.
 - The project is currently an MVP. Treat irreplaceable footage as valuable source material and keep an independent backup.
+
+## Trademark notice
+
+TakeBinder is an independent, fan-made application. It is not affiliated with, endorsed by, or in any way associated with GoPro, Inc. or its products and services.
+
+GoPro, HERO, MAX, MISSION, and their respective logos are trademarks or registered trademarks of GoPro, Inc. in the United States and other countries.
 
 ## Building from source
 

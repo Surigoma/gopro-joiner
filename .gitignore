@@ -5,4 +5,4 @@ bin/
 release/
 .cache/
 *.partial
-gopro-joiner.cdx.json
+takebinder.cdx.json

@@ -43,7 +43,7 @@ func joinGroup(ctx context.Context, g group, target string, progress func(jobPro
 		return jobResult{GroupID: g.ID, Status: "failed", Code: "E_STREAM_MISMATCH", Message: "video or audio streams differ"}
 	}
 
-	temp, err := os.CreateTemp(filepath.Dir(target), ".gopro-joiner-*.partial.mp4")
+	temp, err := os.CreateTemp(filepath.Dir(target), ".takebinder-*.partial.mp4")
 	if err != nil {
 		return jobResult{GroupID: g.ID, Status: "failed", Code: "E_OUTPUT_UNWRITABLE", Message: err.Error()}
 	}
@@ -496,7 +496,7 @@ func mediaProgress(seconds float64, durations []float64) float64 {
 }
 
 func writeConcatFile(dir string, files []videoFile) (string, error) {
-	list, err := os.CreateTemp(dir, ".gopro-joiner-*.ffconcat")
+	list, err := os.CreateTemp(dir, ".takebinder-*.ffconcat")
 	if err != nil {
 		return "", err
 	}

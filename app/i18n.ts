@@ -52,7 +52,7 @@ export function defaultLanguage(): Language {
 
 function initialLanguage(): Language {
   try {
-    const saved = localStorage.getItem("goproJoiner.language");
+    const saved = localStorage.getItem("takeBinder.language");
     if (saved === "ja" || saved === "en") return saved;
   } catch { /* storage unavailable */ }
   return defaultLanguage();

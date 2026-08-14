@@ -11,4 +11,4 @@ export type API = {
 };
 export type ToolState = { ffmpeg: boolean; ffprobe: boolean; label: string; progress: number };
 
-declare global { interface Window { goproJoiner?: API } }
+declare global { interface Window { takeBinder?: API } }

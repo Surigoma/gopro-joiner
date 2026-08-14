@@ -6,7 +6,7 @@
 
 `task test:media-matrix` expects the `samples` directory from GoPro's official `gopro/gpmf-parser` repository at `.cache/gpmf-parser/samples`. It copies source samples into a test directory without modifying them and joins each sample as two chapters. The backend verifies every video, audio, and GPMF packet payload, major GPMF keys, and the time range.
 
-For private long-form footage, set `GOPRO_JOINER_REAL_INPUT` and `GOPRO_JOINER_REAL_OUTPUT`, then run `task test:real-media`. Input names, sizes, and modification times are compared before and after processing.
+For private long-form footage, set `TAKEBINDER_REAL_INPUT` and `TAKEBINDER_REAL_OUTPUT`, then run `task test:real-media`. Input names, sizes, and modification times are compared before and after processing.
 
 | Media | Generation | Codec | Color | Result |
 | --- | --- | --- | --- | --- |

@@ -5,9 +5,12 @@ import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const target = process.platform === "darwin"
-  ? path.join(root, "release", "GoPro Joiner.app")
-  : path.join(root, "release", `GoProJoiner-${process.platform}-${process.arch}`);
+  ? path.join(root, "release", "TakeBinder.app")
+  : path.join(root, "release", `TakeBinder-${process.platform}-${process.arch}`);
 const resources = process.platform === "darwin" ? path.join(target, "Contents", "Resources") : path.join(target, "resources");
+for (const name of ["README.md", "README.ja.md"]) {
+  if (!existsSync(path.join(resources, name))) throw new Error(`missing packaged documentation: ${name}`);
+}
 const manifest = JSON.parse(readFileSync(path.join(resources, "release-manifest.json"), "utf8"));
 if (manifest.platform !== process.platform || manifest.arch !== process.arch) throw new Error("release manifest platform mismatch");
 for (const artifact of manifest.artifacts) {

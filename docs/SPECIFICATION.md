@@ -1,11 +1,11 @@
-# GoPro Joiner Product Specification
+# TakeBinder Product Specification
 
 [日本語](SPECIFICATION.ja.md)
 
-- Document version: 0.2.4
+- Document version: 0.2.5
 - Status: Draft
 - Target release: MVP
-- Last updated: 2026-08-11
+- Last updated: 2026-08-15
 
 The specification is split by subject. Use this file as the entry point and update only the relevant document when making a change.
 

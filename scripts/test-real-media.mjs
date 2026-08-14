@@ -5,10 +5,10 @@ import { createInterface } from "node:readline";
 import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
-const inputDir = process.env.GOPRO_JOINER_REAL_INPUT;
-const outputDir = process.env.GOPRO_JOINER_REAL_OUTPUT;
-if (!inputDir || !outputDir) throw new Error("GOPRO_JOINER_REAL_INPUT and GOPRO_JOINER_REAL_OUTPUT are required");
-const backend = path.join(root, "bin", `gopro-joiner-backend${process.platform === "win32" ? ".exe" : ""}`);
+const inputDir = process.env.TAKEBINDER_REAL_INPUT;
+const outputDir = process.env.TAKEBINDER_REAL_OUTPUT;
+if (!inputDir || !outputDir) throw new Error("TAKEBINDER_REAL_INPUT and TAKEBINDER_REAL_OUTPUT are required");
+const backend = path.join(root, "bin", `takebinder-backend${process.platform === "win32" ? ".exe" : ""}`);
 const before = snapshot(inputDir);
 const child = spawn(backend, [], { stdio: ["pipe", "pipe", "inherit"], shell: false, windowsHide: true, env: process.env });
 const result = await new Promise((resolve, reject) => {

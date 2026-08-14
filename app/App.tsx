@@ -6,7 +6,7 @@ import { defaultLanguage, type Language, type Translate } from "./i18n";
 import type { Group, SkippedFile } from "./types";
 
 export function App() {
-  const api = window.goproJoiner;
+  const api = window.takeBinder;
   const { t, i18n } = useTranslation();
   const language: Language = i18n.resolvedLanguage === "ja" ? "ja" : "en";
   const setLanguage = (value: Language) => { void i18n.changeLanguage(value); };
@@ -184,7 +184,7 @@ export function App() {
   if (!api) return <Container sx={{ py: 6 }}><Alert severity="error">{t("preloadError")}</Alert></Container>;
 
   return <Box sx={{ minHeight: "100vh", background: "radial-gradient(circle at 85% 0%, #173b4c 0, #071019 38%)", py: { xs: 2, md: 4 } }}><Container maxWidth="lg"><Stack spacing={3}>
-    <Box><Typography variant="overline" color="primary" sx={{ fontWeight: 800, letterSpacing: 3 }}>LOSSLESS WORKFLOW</Typography><Typography variant="h2" sx={{ fontWeight: 800, fontSize: { xs: 38, md: 58 }, letterSpacing: "-0.045em" }}>GoPro Joiner</Typography><Typography color="text.secondary">{t("tagline")}</Typography></Box>
+    <Box><Typography variant="overline" color="primary" sx={{ fontWeight: 800, letterSpacing: 3 }}>LOSSLESS WORKFLOW</Typography><Typography variant="h2" sx={{ fontWeight: 800, fontSize: { xs: 38, md: 58 }, letterSpacing: "-0.045em" }}>TakeBinder</Typography><Typography color="text.secondary">{t("tagline")}</Typography></Box>
     <Paper><Tabs value={page} onChange={(_event, value: number) => setPage(value)} aria-label={t("pages")}><Tab label={t("conversion")} /><Tab data-testid="settings-tab" label={t("settings")} disabled={running} /></Tabs></Paper>
     {page === 0 ? <>
       <ConversionPanel t={t} inputDir={inputDir} outputDir={outputDir} busy={busy} running={running} canRun={readyGroups.length > 0} copyOriginals={dateFolders && copyOriginals} originalBytes={originalBytes} scanProgress={scanProgress} onChooseInput={() => void choose(setInputDir)} onChooseOutput={() => void choose(setOutputDir)} onDropInput={(file) => void drop(file, setInputDir)} onDropOutput={(file) => void drop(file, setOutputDir)} onScan={() => void scan()} onRun={() => void run()} onCancel={() => void api.command({ type: "cancel", payload: {} })} />
@@ -200,7 +200,7 @@ export function App() {
 function record(value: unknown): Record<string, unknown> { return value && typeof value === "object" ? value as Record<string, unknown> : {}; }
 function errorMessage(value: unknown): string { return value instanceof Error ? value.message : String(value); }
 function clampPercent(value: number): number { return Number.isFinite(value) ? Math.min(100, Math.max(0, value)) : 0; }
-function savedValue(key: string, fallback: string): string { try { return localStorage.getItem(`goproJoiner.${key}`) ?? fallback; } catch { return fallback; } }
+function savedValue(key: string, fallback: string): string { try { return localStorage.getItem(`takeBinder.${key}`) ?? fallback; } catch { return fallback; } }
 function savedBoolean(key: string, fallback: boolean): boolean { return savedValue(key, String(fallback)) === "true"; }
 function savedOutputNameFormat(): string {
   const value = savedValue("outputNameFormat", "{YYYY}-{MM}-{DD}_{hh}{mm}{ss}_{NAME}");
@@ -209,6 +209,6 @@ function savedOutputNameFormat(): string {
 function savedDateFolderFormat(): string {
   return savedValue("dateFolderFormat", "{YYYY}-{MM}-{DD}").replace(/\{?(YYYY|MM|DD)\}?/g, "{$1}");
 }
-function saveValue(key: string, value: string): void { try { localStorage.setItem(`goproJoiner.${key}`, value); } catch { /* storage unavailable */ } }
+function saveValue(key: string, value: string): void { try { localStorage.setItem(`takeBinder.${key}`, value); } catch { /* storage unavailable */ } }
 function fileName(path: string): string { return path.split(/[\\/]/).pop() ?? path; }
 function classificationLabel(value: string, t: Translate): string { return ({ broken: t("broken"), "not-gopro": t("notGoPro"), "gopro-no-gpmf": t("noGpmf") } as Record<string, string>)[value] ?? value; }

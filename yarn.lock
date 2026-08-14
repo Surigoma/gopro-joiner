@@ -1040,25 +1040,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gopro-joiner@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "gopro-joiner@workspace:."
-  dependencies:
-    "@emotion/react": "npm:11.14.0"
-    "@emotion/styled": "npm:11.14.1"
-    "@mui/material": "npm:9.2.0"
-    "@types/react": "npm:19.2.14"
-    "@types/react-dom": "npm:19.2.3"
-    electron: "npm:43.3.0"
-    i18next: "npm:26.3.6"
-    react: "npm:19.2.7"
-    react-dom: "npm:19.2.7"
-    react-i18next: "npm:17.0.10"
-    typescript: "npm:7.0.2"
-    vite: "npm:8.1.0"
-  languageName: unknown
-  linkType: soft
-
 "graceful-fs@npm:^4.2.11, graceful-fs@npm:^4.2.6":
   version: 4.2.11
   resolution: "graceful-fs@npm:4.2.11"
@@ -1668,6 +1649,25 @@ __metadata:
   checksum: 10c0/6c4032340701a9950865f7ae8ef38578d8d7053f5e10518076e6554a9381fa91bd9c6850193695c141f32b21f979c985db07265a758867bac95de05f7d8aeb39
   languageName: node
   linkType: hard
+
+"takebinder@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "takebinder@workspace:."
+  dependencies:
+    "@emotion/react": "npm:11.14.0"
+    "@emotion/styled": "npm:11.14.1"
+    "@mui/material": "npm:9.2.0"
+    "@types/react": "npm:19.2.14"
+    "@types/react-dom": "npm:19.2.3"
+    electron: "npm:43.3.0"
+    i18next: "npm:26.3.6"
+    react: "npm:19.2.7"
+    react-dom: "npm:19.2.7"
+    react-i18next: "npm:17.0.10"
+    typescript: "npm:7.0.2"
+    vite: "npm:8.1.0"
+  languageName: unknown
+  linkType: soft
 
 "tar@npm:^7.5.4":
   version: 7.5.22

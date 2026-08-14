@@ -2,7 +2,7 @@
 
 ## Project
 
-GoPro Joinerは、GoProの分割動画を録画単位でまとめるクロスプラットフォームアプリである。UIはElectron/TypeScript、バックエンドはGoを使用する。製品仕様の入口は `docs/SPECIFICATION.md`。
+TakeBinderは、GoProの分割動画を録画単位でまとめて整理するクロスプラットフォームアプリである。UIはElectron/TypeScript、バックエンドはGoを使用する。製品仕様の入口は `docs/SPECIFICATION.md`。
 
 ## Before changing code
 

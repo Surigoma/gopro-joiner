@@ -17,7 +17,7 @@ import (
 	"time"
 )
 
-const toolsDirectoryEnvironment = "GOPRO_JOINER_TOOLS_DIR"
+const toolsDirectoryEnvironment = "TAKEBINDER_TOOLS_DIR"
 
 type toolAsset struct {
 	Tool     string

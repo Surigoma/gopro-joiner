@@ -17,7 +17,7 @@ let backend: ChildProcessWithoutNullStreams | null = null;
 const smokeTest = process.argv.includes("--smoke-test");
 if (smokeTest) {
   app.disableHardwareAcceleration();
-  app.setPath("userData", path.join(app.getPath("temp"), "gopro-joiner-smoke"));
+  app.setPath("userData", path.join(app.getPath("temp"), "takebinder-smoke"));
 }
 
 function sendToWindow(message: BackendMessage): void {
@@ -26,7 +26,7 @@ function sendToWindow(message: BackendMessage): void {
 }
 
 function backendPath(): string {
-  const executable = process.platform === "win32" ? "gopro-joiner-backend.exe" : "gopro-joiner-backend";
+  const executable = process.platform === "win32" ? "takebinder-backend.exe" : "takebinder-backend";
   return app.isPackaged
     ? path.join(process.resourcesPath, "bin", executable)
     : path.join(__dirname, "..", "bin", executable);
@@ -40,7 +40,7 @@ function startBackend(): ChildProcessWithoutNullStreams {
     stdio: ["pipe", "pipe", "pipe"],
     windowsHide: true,
     shell: false,
-    env: { ...process.env, GOPRO_JOINER_TOOLS_DIR: path.join(app.getPath("userData"), "tools") }
+    env: { ...process.env, TAKEBINDER_TOOLS_DIR: path.join(app.getPath("userData"), "tools") }
   });
   const lines = readline.createInterface({ input: backend.stdout });
   lines.on("line", (line) => {
@@ -111,12 +111,12 @@ async function createWindow(): Promise<void> {
           option?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
           setTimeout(() => {
             const expected = target === "ja" ? "ファイル名の形式" : "Filename format";
-            const languageChanged = document.documentElement.lang === target && localStorage.getItem("goproJoiner.language") === target && document.body.innerText.includes(expected);
+            const languageChanged = document.documentElement.lang === target && localStorage.getItem("takeBinder.language") === target && document.body.innerText.includes(expected);
             window.confirm = () => true;
             document.querySelector('[data-testid="reset-settings"]')?.click();
             setTimeout(() => {
               const defaultLanguage = navigator.language.toLowerCase().startsWith("ja") ? "ja" : "en";
-              resolve(Boolean(button) && Boolean(dropZone) && event.defaultPrevented && languageChanged && document.documentElement.lang === defaultLanguage && localStorage.getItem("goproJoiner.language") === defaultLanguage);
+              resolve(Boolean(button) && Boolean(dropZone) && event.defaultPrevented && languageChanged && document.documentElement.lang === defaultLanguage && localStorage.getItem("takeBinder.language") === defaultLanguage);
             }, 50);
           }, 50);
         }, 50);
