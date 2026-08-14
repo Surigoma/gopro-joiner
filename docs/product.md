@@ -4,7 +4,7 @@
 
 ## 1. Overview
 
-GoPro Joiner is a desktop application that scans a selected directory for chapters created when a GoPro splits one recording because of file-size limits or similar constraints, then combines each recording into one MP4.
+TakeBinder is a desktop application that scans a selected directory for chapters created when a GoPro splits one recording because of file-size limits or similar constraints, then combines each recording into one MP4 and organizes the results into predictable folders.
 
 It does not re-encode video or audio and preserves telemetry such as gyroscope, accelerometer, and GPS data stored in GoPro-specific GPMF tracks. Independent capture groups are processed in parallel. A group containing only one file is output unchanged without media processing.
 
@@ -102,4 +102,4 @@ The user reviews scan results before starting processing in a two-stage workflow
 - Whether SHA-256 verification should be enabled by default
 - Whether the first release should include macOS Intel
 - Whether FFmpeg can safely join GPMF for every target model (verified with supplied samples)
-- Final application name, icon, signing/notarization, and distribution method
+- Final icon, signing/notarization, and distribution method

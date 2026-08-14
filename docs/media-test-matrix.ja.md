@@ -6,7 +6,7 @@
 
 `task test:media-matrix` は、GoPro公式 `gopro/gpmf-parser` の `samples` を `.cache/gpmf-parser/samples` に用意した状態で実行する。元サンプルを変更せず試験用ディレクトリへコピーし、各素材を2チャプターとして結合する。出力は映像・音声・GPMFの全パケットpayload、主要GPMFキー、時間範囲をバックエンド本体で検証する。
 
-長時間の私有実素材は `GOPRO_JOINER_REAL_INPUT` と `GOPRO_JOINER_REAL_OUTPUT` を設定して `task test:real-media` を実行する。入力のファイル名、サイズ、更新日時を処理前後で照合する。
+長時間の私有実素材は `TAKEBINDER_REAL_INPUT` と `TAKEBINDER_REAL_OUTPUT` を設定して `task test:real-media` を実行する。入力のファイル名、サイズ、更新日時を処理前後で照合する。
 
 | 素材 | 世代 | コーデック | 色 | 結果 |
 | --- | --- | --- | --- | --- |

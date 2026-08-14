@@ -1,4 +1,3 @@
-module github.com/local/gopro-joiner/backend
+module github.com/Surigoma/takebinder/backend
 
 go 1.26
-

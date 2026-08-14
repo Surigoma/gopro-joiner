@@ -1,8 +1,8 @@
-# GoPro Joiner
+# TakeBinder
 
 [English](README.md)
 
-GoPro Joinerは、GoProが分割保存したチャプターファイルを、1回の撮影につき1本のMP4へまとめるアプリです。映像と音声を再エンコードせず、Gyroflowなどが利用するGoPro GPMFテレメトリも保持します。
+TakeBinderは、GoProが分割保存したチャプターファイルを1回の撮影につき1本のMP4へまとめ、分かりやすいフォルダへ整理するアプリです。映像と音声を再エンコードせず、Gyroflowなどが利用するGoPro GPMFテレメトリも保持します。
 
 リリース履歴は[変更履歴](CHANGELOG.md)を参照してください。
 
@@ -17,11 +17,11 @@ GoPro Joinerは、GoProが分割保存したチャプターファイルを、1�
 
 ## インストールと起動
 
-GoPro Joinerはポータブルアプリとして配布します。[GitHub Releases](https://github.com/Surigoma/gopro-joiner/releases)からお使いのOS向けパッケージを入手し、`SHA256SUMS.txt`で検証してから展開してください。展開先のファイルはすべて同じフォルダに置いたまま使用してください。
+TakeBinderはポータブルアプリとして配布します。[GitHub Releases](https://github.com/Surigoma/takebinder/releases)からお使いのOS向けパッケージを入手し、`SHA256SUMS.txt`で検証してから展開してください。展開先のファイルはすべて同じフォルダに置いたまま使用してください。
 
-- Windows: `GoProJoiner-win32-x64` 内の `GoPro Joiner.exe` を起動します。
-- macOS: `GoPro Joiner.app` を起動します。
-- Linux: `GoProJoiner-linux-x64` 内の `gopro-joiner` を起動します。
+- Windows: `TakeBinder-win32-x64` 内の `TakeBinder.exe` を起動します。
+- macOS: `TakeBinder.app` を起動します。
+- Linux: `TakeBinder-linux-x64` 内の `takebinder` を起動します。
 
 初回利用時は、**設定**を開いて**検証済みツールを取得**を選択してください。固定版のFFmpegとffprobeをダウンロードし、サイズとSHA-256を検証してからアプリ管理領域へ保存します。この取得にはインターネット接続が必要ですが、動画処理自体はローカルで行います。
 
@@ -39,7 +39,7 @@ GoPro Joinerはポータブルアプリとして配布します。[GitHub Releas
 
 ## 元動画を保護します
 
-GoPro Joinerは入力動画を変更、移動、削除しないよう設計されています。
+TakeBinderは入力動画を変更、移動、削除しないよう設計されています。
 
 - 既存の出力を暗黙に上書きせず、安全な連番名を使用します。
 - 一時ファイルへ処理し、検証に成功した場合だけ完成名へ確定します。
@@ -80,6 +80,12 @@ GoPro Joinerは入力動画を変更、移動、削除しないよう設計さ�
 - ストリーム互換性がないチャプターは、再エンコードへ切り替えず失敗とします。
 - 実GoPro素材で映像・音声・`gpmd`のパケット単位検証に合格していますが、すべてのGoPro機種と撮影モードは未検証です。
 - 現在はMVPです。交換できない大切な素材は、別の場所にもバックアップを保管してください。
+
+## 商標について
+
+TakeBinderは、独立して制作された非公式のファンメイドアプリです。GoPro, Inc.および同社の製品・サービスとは提携、協賛、承認その他の関係がありません。
+
+GoPro、HERO、MAX、MISSIONおよび各ロゴは、米国およびその他の国におけるGoPro, Inc.の商標または登録商標です。
 
 ## ソースからビルドする
 

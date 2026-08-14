@@ -26,7 +26,7 @@ func copyAtomic(ctx context.Context, source, target string, strictHash bool, pro
 	if err != nil {
 		return "", err
 	}
-	temp, err := os.CreateTemp(filepath.Dir(target), ".gopro-joiner-*.partial")
+	temp, err := os.CreateTemp(filepath.Dir(target), ".takebinder-*.partial")
 	if err != nil {
 		return "", err
 	}
@@ -206,7 +206,7 @@ func writeReport(outputDir string, report runReport) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	name := "gopro-joiner-report-" + time.Now().UTC().Format("20060102-150405.000000000") + ".json"
+	name := "takebinder-report-" + time.Now().UTC().Format("20060102-150405.000000000") + ".json"
 	path := filepath.Join(outputDir, name)
 	file, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0o644)
 	if err != nil {
@@ -227,7 +227,7 @@ func writeReportIfEnabled(outputDir string, report runReport, enabled bool) (str
 }
 
 func reusableResults(outputDir string, groups []group) ([]group, []jobResult) {
-	reports, _ := filepath.Glob(filepath.Join(outputDir, "gopro-joiner-report-*.json"))
+	reports, _ := filepath.Glob(filepath.Join(outputDir, "takebinder-report-*.json"))
 	sort.Sort(sort.Reverse(sort.StringSlice(reports)))
 	completed := map[string]reportResult{}
 	for _, path := range reports {

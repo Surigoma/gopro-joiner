@@ -9,7 +9,7 @@ const samples = path.join(root, ".cache", "gpmf-parser", "samples");
 const work = path.join(root, ".cache", "media-matrix");
 const inputDir = path.join(work, "input");
 const outputDir = path.join(work, "output");
-const backend = path.join(root, "bin", `gopro-joiner-backend${process.platform === "win32" ? ".exe" : ""}`);
+const backend = path.join(root, "bin", `takebinder-backend${process.platform === "win32" ? ".exe" : ""}`);
 const cases = [
   ["hero5.mp4", "GX010205.MP4", "GX020205.MP4"],
   ["hero8.mp4", "GX010208.MP4", "GX020208.MP4"],
@@ -25,7 +25,7 @@ for (const [source, first, second] of cases) {
   cpSync(path.join(samples, source), path.join(inputDir, second));
 }
 const ffmpegName = process.platform === "win32" ? "ffmpeg.exe" : "ffmpeg";
-const managedFFmpeg = process.env.GOPRO_JOINER_TOOLS_DIR ? path.join(process.env.GOPRO_JOINER_TOOLS_DIR, "ffmpeg", "8.1.2-1", ffmpegName) : "";
+const managedFFmpeg = process.env.TAKEBINDER_TOOLS_DIR ? path.join(process.env.TAKEBINDER_TOOLS_DIR, "ffmpeg", "8.1.2-1", ffmpegName) : "";
 const ffmpeg = managedFFmpeg && existsSync(managedFFmpeg) ? managedFFmpeg : ffmpegName;
 const hdrSource = path.join(work, "hero8-hdr.mp4");
 const hdr = spawnSync(ffmpeg, [

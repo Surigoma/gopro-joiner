@@ -2,7 +2,7 @@ import { spawn } from "node:child_process";
 import { createInterface } from "node:readline";
 import { fileURLToPath } from "node:url";
 
-const executable = fileURLToPath(new URL(`../bin/gopro-joiner-backend${process.platform === "win32" ? ".exe" : ""}`, import.meta.url));
+const executable = fileURLToPath(new URL(`../bin/takebinder-backend${process.platform === "win32" ? ".exe" : ""}`, import.meta.url));
 const child = spawn(executable, [], { stdio: ["pipe", "pipe", "inherit"], shell: false, windowsHide: true });
 const messages = [];
 createInterface({ input: child.stdout }).on("line", (line) => messages.push(JSON.parse(line)));

@@ -203,7 +203,7 @@ func TestCopyAtomicCancellationLeavesNoOutput(t *testing.T) {
 	if _, err := os.Stat(target); !errors.Is(err, os.ErrNotExist) {
 		t.Fatalf("cancelled output exists: %v", err)
 	}
-	partials, _ := filepath.Glob(filepath.Join(dir, ".gopro-joiner-*.partial"))
+	partials, _ := filepath.Glob(filepath.Join(dir, ".takebinder-*.partial"))
 	if len(partials) != 0 {
 		t.Fatalf("partial outputs remain: %v", partials)
 	}
@@ -285,9 +285,9 @@ func TestGPMFVerificationHelpers(t *testing.T) {
 }
 
 func TestRealGoProPacketVerification(t *testing.T) {
-	rawInputs, output := os.Getenv("GOPRO_JOINER_SAMPLE_INPUTS"), os.Getenv("GOPRO_JOINER_SAMPLE_OUTPUT")
+	rawInputs, output := os.Getenv("TAKEBINDER_SAMPLE_INPUTS"), os.Getenv("TAKEBINDER_SAMPLE_OUTPUT")
 	if rawInputs == "" || output == "" {
-		t.Skip("set GOPRO_JOINER_SAMPLE_INPUTS and GOPRO_JOINER_SAMPLE_OUTPUT to run")
+		t.Skip("set TAKEBINDER_SAMPLE_INPUTS and TAKEBINDER_SAMPLE_OUTPUT to run")
 	}
 	ffmpeg, err := findTool("ffmpeg")
 	if err != nil {
